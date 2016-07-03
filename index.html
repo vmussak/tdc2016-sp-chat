@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>TDC Chat!</title>
+    </head>
+    <body>
+        <h1>Chat</h1>
+        <div id="autenticacao">
+            <input type="text" id="nome">
+            <button onclick="login(nome.value)">Login!</button>
+        </div>
+
+        <div id="chat" style="display: none">
+
+            <fieldset>
+                <input type="text" id="m">
+                <button onclick="enviar(m)">Enviar!</button>
+            </fieldset>
+        </div>
+    </body>
+</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('mensagem', function(data){
+        addMessage(data);
+    })
+
+    function enviar(msg){
+        if(!msg.value)
+            return;
+            
+        addMessage({usuario: 'Eu', mensagem: msg.value});
+        socket.emit('mensagem', msg.value);
+        msg.value = '';
+    }
+
+    function login(nome){
+        if(!nome){
+            alert("O nome é obrigatório!");
+            return;
+        }
+
+        socket.emit('login', nome);
+        document.getElementById('autenticacao').style.display = 'none';
+        document.getElementById('chat').style.display = 'block';
+    }
+
+    function addMessage(data){
+        var msg = '<p> <b>' + data.usuario + ': </b>'+ data.mensagem + '</p>';
+        document.getElementById('chat').innerHTML += msg;
+    }
+</script>
