@@ -1,0 +1,174 @@
+*, *::before, *::after {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	box-sizing: border-box;
+}
+html {
+	background: url(background.png) center fixed no-repeat;
+	background-size: cover;
+	font: 14px sans-serif;
+}
+body {
+	display: flex;
+	overflow: hidden;
+}
+	body > div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1 0 100%;
+		transition: 300ms ease-out;
+	}
+	body.chat-active > div {
+		transform: translateX(-100%);
+	}
+button {
+	cursor: pointer;
+}
+.card {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.15);
+}
+.card .card-content {
+	flex: 1 0 auto;
+	overflow: auto;
+	padding: 15px;
+}
+.card .card-title {
+	flex: 0 0 auto;
+	font-size: 20px;
+	padding: 15px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	font-weight: 500;
+}
+input {
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+	font-size: 16px;
+	display: block;
+	height: 32px;
+	width: 100%;
+}
+input:focus {
+	border-bottom: 2px solid #00BCD4;
+	height: 33px;
+	margin-bottom: -1px;
+}
+button.login {
+	width: 100%;
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 2px;
+	color: white;
+	background-color: #00BCD4;
+	transition: 100ms ease-in-out;
+}
+	button.login:hover, button.login:focus {
+		background-color: #4DD0E1;
+	}
+#autenticacao {
+	width: 300px;
+}
+.chat-container .card {
+	width: 500px;
+	height: 600px;
+}
+ul {
+	list-style: none;
+	flex: 1;
+    overflow: auto;
+	padding: 15px;
+}
+li  {
+	clear: both;
+	margin: 10px 0;
+	padding-right: 40px;
+}
+li::before {
+	content: attr(data-user);
+	display: block;
+	font-size: 12px;
+	padding-left: 2px;
+	color: rgba(0, 0, 0, 0.64);
+}
+li::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+li div {
+	padding: 10px;
+	float: left;
+	background-color: #00ACC1;
+	color: white;
+	border-radius: 15px 15px 15px 5px;
+	max-width: 100%;
+    word-break: break-word;
+}
+li[data-user="Servidor"] {
+	padding: 0;
+}
+li[data-user="Servidor"]::before {
+	content: none;
+}
+li[data-user="Servidor"] div {
+	float: none;
+	background-color: transparent;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+}
+li[data-user="Eu"]::before {
+	content: none;
+}
+li[data-user="Eu"] {
+	padding-left: 40px;
+	padding-right: 0;
+}
+li[data-user="Eu"] div {
+	float: right;
+	background-color: #EEE;
+	color: rgba(0,0,0,0.8);
+	border-radius: 15px 15px 5px 15px;
+}
+.chat-container .card-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 0;
+	flex: 1;
+}
+.chat-container form {
+	padding: 15px;
+	display: flex;
+	align-items: center;
+}
+.chat-container input {
+	margin-right: 10px;
+	border: none;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.15);
+	background-color: #EEE;
+	padding: 0 15px;
+	height: 40px;
+}
+.chat-container button {
+	flex: 0 0 auto;
+	width: 48px;
+	height: 48px;
+	border-radius: 100%;
+	background: url(send.png) center no-repeat;
+	background-color: #009688;
+	background-size: 24px 24px;
+	transition: 200ms ease-in-out;
+}
+.chat-container button:hover {
+	background-color: #4DB6AC;
+}
+.chat-container button:active {
+	background-color: #80CBC4;
+}

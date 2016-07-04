@@ -1,20 +1,33 @@
 <html>
     <head>
         <title>TDC Chat!</title>
+        <link rel="stylesheet" href="content/app.css">
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
     </head>
     <body>
-        <h1>Chat</h1>
-        <div id="autenticacao">
-            <input type="text" id="nome">
-            <button onclick="login(nome.value)">Login!</button>
+        <div class="auth-container">
+            <div id="autenticacao" class="card">
+                <h1 class="card-title">Chat - Login</h1>
+                <form class="card-content" onsubmit="login(event, nome.value)">
+                    <input type="text" placeholder="Usuário" id="nome" autocomplete="off">
+                    <button class="login">LOGIN</button>
+                </form>
+            </div>
         </div>
 
-        <div id="chat" style="display: none">
+        <div class="chat-container">
+            <div class="card">
+                <h2 class="card-title">Lobby</h2>
+                <div class="card-content">
+                    <ul id="chat">
 
-            <fieldset>
-                <input type="text" id="m">
-                <button onclick="enviar(m)">Enviar!</button>
-            </fieldset>
+                    </ul>
+                    <form onsubmit="enviar(event, m)">
+                        <input type="text" id="m" autocomplete="off" placeholder="Digite seu texto" required>
+                        <button></button>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
@@ -27,28 +40,30 @@
         addMessage(data);
     })
 
-    function enviar(msg){
+    function enviar(e, msg){
         if(!msg.value)
             return;
             
         addMessage({usuario: 'Eu', mensagem: msg.value});
         socket.emit('mensagem', msg.value);
         msg.value = '';
+        e.preventDefault();
     }
 
-    function login(nome){
-        if(!nome){
+    function login(e, nome){
+        if (!nome) {
             alert("O nome é obrigatório!");
             return;
         }
 
         socket.emit('login', nome);
-        document.getElementById('autenticacao').style.display = 'none';
-        document.getElementById('chat').style.display = 'block';
+        $('body').addClass('chat-active');
+        e.preventDefault();
     }
 
     function addMessage(data){
-        var msg = '<p> <b>' + data.usuario + ': </b>'+ data.mensagem + '</p>';
+        var msg = '<li data-user="' + data.usuario + '"><div>'+ data.mensagem + '</div></li>';
         document.getElementById('chat').innerHTML += msg;
+        document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
     }
 </script>

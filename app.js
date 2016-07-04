@@ -1,10 +1,13 @@
 const app = require('express')(),
+    express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
+
+app.use(express.static('.'));
 
 io.on('connection', (socket) => {
     console.log('Alguém se conectou!');
