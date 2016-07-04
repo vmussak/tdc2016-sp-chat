@@ -16,9 +16,8 @@ body {
 }
 	body > div {
 		display: flex;
-		align-items: center;
-		justify-content: center;
 		flex: 1 0 100%;
+    	width: 100%;
 		transition: 300ms ease-out;
 	}
 	body.chat-active > div {
@@ -28,6 +27,9 @@ button {
 	cursor: pointer;
 }
 .card {
+	margin: auto;
+	max-height: 100%;
+	max-width: 100%;
 	display: flex;
 	flex-direction: column;
 	background-color: white;
@@ -149,12 +151,12 @@ li[data-user="Eu"] div {
 	align-items: center;
 }
 .chat-container input {
-	margin-right: 10px;
 	border: none;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.15);
 	background-color: #EEE;
 	padding: 0 15px;
 	height: 40px;
+	margin: 0 10px 0 0 !important;
 }
 .chat-container button {
 	flex: 0 0 auto;
