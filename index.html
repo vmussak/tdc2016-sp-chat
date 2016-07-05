@@ -52,7 +52,7 @@
     }
 
     function login(e, nome){
-        if (!nome) {
+        if (!nome || !nome.trim()) {
             alert("O nome é obrigatório!");
             return;
         }
