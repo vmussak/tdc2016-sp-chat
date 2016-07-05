@@ -14,18 +14,15 @@ app.use((req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('Alguém se conectou!');
-
-    socket.emit('mensagem', {
-        usuario: 'Servidor',
-        mensagem: 'Olá, seja bem-vindo ao chat!'
-    });
-
     socket.on('login', (usuario) => {
         socket.usuario = usuario;
         socket.broadcast.emit('mensagem', {
             usuario: 'Servidor',
             mensagem: usuario + " entrou na conversa..."
+        });
+        socket.emit('mensagem', {
+            usuario: 'Servidor',
+            mensagem: 'Olá, ' + usuario + ' seja bem-vindo ao chat!'
         });
     });
 
@@ -37,7 +34,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('Alguém saiu :(');
+        if(socket.usuario)
+            socket.broadcast.emit('mensagem', {
+                usuario: 'Servidor',
+                mensagem: usuario + " saiu da conversa..."
+            });
     });
 });
 
