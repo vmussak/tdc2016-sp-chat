@@ -8,26 +8,7 @@
     <body>
         <div class="auth-container">
             <div id="autenticacao" class="card">
-                <h1 class="card-title">Chat - Login</h1>
-                <form class="card-content" onsubmit="login(event, nome.value)">
-                    <input type="text" placeholder="Usuário" id="nome" autocomplete="off">
-                    <button class="login">LOGIN</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="chat-container">
-            <div class="card">
-                <h2 class="card-title">Chat :)</h2>
-                <div class="card-content">
-                    <ul id="chat">
-
-                    </ul>
-                    <form onsubmit="enviar(event, m)">
-                        <input type="text" id="m" autocomplete="off" placeholder="Digite seu texto" required>
-                        <button></button>
-                    </form>
-                </div>
+                <h1 class="card-title">Página não encontrada :(</h1>
             </div>
         </div>
     </body>
@@ -59,7 +40,6 @@
 
         socket.emit('login', nome);
         $('body').addClass('chat-active');
-        $('#m').focus();
         e.preventDefault();
     }
 

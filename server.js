@@ -3,11 +3,15 @@ const app = require('express')(),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
+app.use(express.static('.'));
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.use(express.static('.'));
+app.use((req, res) => {
+    res.sendFile(__dirname + "/not-found.html");
+});
 
 io.on('connection', (socket) => {
     console.log('Alguém se conectou!');
@@ -37,6 +41,9 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => {
+app.set('port', process.env.PORT || 3000);
+
+server.listen(app.get('port'), () => {
     console.log('Server Up!');
 });
+
