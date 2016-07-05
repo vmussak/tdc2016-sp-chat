@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         if(socket.usuario)
-            io.emit('mensagem', {
+            socket.broadcast.emit('mensagem', {
                 usuario: 'Servidor',
                 mensagem: socket.usuario + " saiu da conversa..."
             });
